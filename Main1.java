@@ -49,27 +49,20 @@ public class Main1 {
 
     }
 
-public void sendPushNotification(String message) {
-    String webhookUrl = System.getenv("THING_HELLO");
-    
-    // Instead of POST, try sending it as a simple GET request 
-    // by appending the message to the URL (if Pushcut supports it)
-    // Or just ensure the POST payload is extremely simple:
-    String jsonPayload = "{\"text\": \"Test from GitHub\"}";
+public static void sendPushNotification(String message) {
+    // Replace 'your-unique-topic-name' with a name only you know
+    String ntfyUrl = "https://ntfy.sh/nfjdudidicic";
+    //String shortcutUrl = "shortcuts://run-shortcut?name=school"; // Replace 'school' with your shortcut name
 
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(webhookUrl))
-        .header("Content-Type", "application/json")
-        .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+        .uri(URI.create(ntfyUrl))
+        //.header("Click", shortcutUrl) // This makes tapping the notification run your shortcut
+        .POST(HttpRequest.BodyPublishers.ofString(message))
         .build();
 
-    // Add a print statement to see if it even reaches this part
-    System.out.println("Attempting to send to: " + webhookUrl);
-    
     try {
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("Response code: " + response.statusCode());
+        client.send(request, HttpResponse.BodyHandlers.ofString());
     } catch (Exception e) {
         e.printStackTrace();
     }
