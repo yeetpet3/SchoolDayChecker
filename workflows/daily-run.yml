@@ -17,4 +17,4 @@ jobs:
       - name: Run Java JAR
         env:
           PUSHCUT_EXECUTE_URL: ${{ secrets.PUSHCUT_EXECUTE_URL }}
-        run: java -jar your-app.jar
+        run: java -jar Main1.jar
