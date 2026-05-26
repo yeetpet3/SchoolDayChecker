@@ -1,8 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.time.LocalDate;
-import java.util.*;
-import java.io.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.Scanner;
 
 public class Main1 {
 
@@ -41,9 +43,26 @@ public class Main1 {
         String[] parted = dayFr.split(":");
         dayFr = parted[1];
         return dayFr;
+    }
 
+    public void sendPushNotification(String message) {
+        String webhookUrl = System.getenv("PUSHCUT_EXECUTE_URL");
+        if (webhookUrl == null) return;
 
+        String jsonPayload = String.format("{\"input\": \"%s\"}", message.replace("\"", "\\\""));
 
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(webhookUrl))
+                .header("Content-Type", "application/json")
+                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+                .build();
+
+        try {
+            client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String activities(String day1)
@@ -74,6 +93,10 @@ public class Main1 {
         String day = thing.getDay();
         System.out.println("It is a: " + day);
         System.out.println("For Second Period You Have: " + thing.activities(day));
+        String finalMessage = "It is a " + day + ". Second period: " + activity;
+        
+        // Send to iPhone
+        thing.sendPushNotification(finalMessage);
         
     }
 
