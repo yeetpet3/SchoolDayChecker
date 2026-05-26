@@ -49,26 +49,31 @@ public class Main1 {
 
     }
 
-    public void sendPushNotification(String message) {
-        String webhookUrl = System.getenv("PUSHCUT_EXECUTE_URL");
-        if (webhookUrl == null) return;
+public void sendPushNotification(String message) {
+    String webhookUrl = System.getenv("PUSHCUT_WEBHOOK_URL");
+    
+    // Instead of POST, try sending it as a simple GET request 
+    // by appending the message to the URL (if Pushcut supports it)
+    // Or just ensure the POST payload is extremely simple:
+    String jsonPayload = "{\"text\": \"Test from GitHub\"}";
 
-        String jsonPayload = String.format("{\"input\": \"%s\"}", message.replace("\"", "\\\""));
+    HttpClient client = HttpClient.newHttpClient();
+    HttpRequest request = HttpRequest.newBuilder()
+        .uri(URI.create(webhookUrl))
+        .header("Content-Type", "application/json")
+        .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
+        .build();
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(webhookUrl))
-                .header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(jsonPayload))
-                .build();
-
-        try {
-            client.send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    // Add a print statement to see if it even reaches this part
+    System.out.println("Attempting to send to: " + webhookUrl);
+    
+    try {
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("Response code: " + response.statusCode());
+    } catch (Exception e) {
+        e.printStackTrace();
     }
-
+}
     public String activities(String day1)
     {
         
