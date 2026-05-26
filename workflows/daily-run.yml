@@ -1,7 +1,7 @@
 name: Daily Java Task
 on:
   schedule:
-    - cron: '15 0 * * *' # Runs at 08:00 UTC
+    - cron: '15 0 * * *' # Runs at 12:15 UTC
   workflow_dispatch:
 
 jobs:
