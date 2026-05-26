@@ -50,7 +50,7 @@ public class Main1 {
     }
 
 public void sendPushNotification(String message) {
-    String webhookUrl = System.getenv("PUSHCUT_WEBHOOK_URL");
+    String webhookUrl = System.getenv("THING_HELLO");
     
     // Instead of POST, try sending it as a simple GET request 
     // by appending the message to the URL (if Pushcut supports it)
