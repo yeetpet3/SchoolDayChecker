@@ -4,12 +4,13 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.util.*;
+import java.io.*;
 
 public class Main1 {
 
-    //private String date = LocalDate.now().toString();
-    private String date = "2026-05-26";
+    private String date = LocalDate.now().toString();
     private File thing1;
     private Scanner thing2;
 
@@ -21,7 +22,7 @@ public class Main1 {
 
     public void createFile() throws FileNotFoundException 
     {
-        thing1 = new File("E:\\Dylan\\Documents\\SchoolDayChecker\\calendar_365.ics");
+        thing1 = new File("calendar_365.ics");
         thing2 = new Scanner(thing1);
     }
 
@@ -43,6 +44,9 @@ public class Main1 {
         String[] parted = dayFr.split(":");
         dayFr = parted[1];
         return dayFr;
+
+
+
     }
 
     public void sendPushNotification(String message) {
@@ -91,9 +95,11 @@ public class Main1 {
         Main1 thing = new Main1();
         thing.createFile();
         String day = thing.getDay();
+        String activity = thing.activities(day);
         System.out.println("It is a: " + day);
-        System.out.println("For Second Period You Have: " + thing.activities(day));
-        String finalMessage = "It is a " + day + ". Second period: " + activity;
+        System.out.println("For Second Period You Have: " + activity);
+
+         String finalMessage = "It is a " + day + ". Second period: " + activity;
         
         // Send to iPhone
         thing.sendPushNotification(finalMessage);
