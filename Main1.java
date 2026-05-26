@@ -57,15 +57,15 @@ public static void sendPushNotification(String message, String day2) {
     String tags = null; 
       if(dayNum%2==0)
             {
-            tags = ":ball:";
+            tags = "ball";
             }
         else if(dayNum==1 || dayNum==5 || dayNum==9)
             {
-            tags = ":test_tube:";
+            tags = "test_tube";
             }
         else 
             {
-            tags = ":partying_face:";
+            tags = "partying_face";
             }
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
