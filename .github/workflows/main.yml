@@ -8,6 +8,10 @@ jobs:
   run-java:
     runs-on: ubuntu-latest
     steps:
+      - name: Run Java
+        env:
+          PUSHCUT_WEBHOOK_URL: ${{ secrets.PUSHCUT_WEBHOOK_URL }}
+        run: java -cp Main1.jar Main1
       - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v4
