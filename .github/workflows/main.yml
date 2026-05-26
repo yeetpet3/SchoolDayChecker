@@ -23,5 +23,5 @@ jobs:
       # Runs the compiled class
       - name: Run Java
         env:
-          PUSHCUT_WEBHOOK_URL: ${{ secrets.PUSHCUT_WEBHOOK_URL }}
+          PUSHCUT_WEBHOOK_URL: ${{ secrets.PUSHCUT_EXECUTE_URL }}
         run: java Main1
