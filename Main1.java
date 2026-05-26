@@ -58,6 +58,9 @@ public static void sendPushNotification(String message) {
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create(ntfyUrl))
         //.header("Click", shortcutUrl) // This makes tapping the notification run your shortcut
+        .header("Title", "School Day Update")  // Sets the notification title
+        .header("Priority", "high")            // Sets urgency (1=min, 5=max)
+        .header("Tags", "school,bell")
         .POST(HttpRequest.BodyPublishers.ofString(message))
         .build();
 
