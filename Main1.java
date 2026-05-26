@@ -49,17 +49,29 @@ public class Main1 {
 
     }
 
-public static void sendPushNotification(String message) {
+public static void sendPushNotification(String message, String day2) {
     // Replace 'your-unique-topic-name' with a name only you know
     String ntfyUrl = "https://ntfy.sh/nfjdudidicic";
     //String shortcutUrl = "shortcuts://run-shortcut?name=school"; // Replace 'school' with your shortcut name
-
+    int dayNum = Integer.parseInt(day2.substring(4));
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create(ntfyUrl))
         //.header("Click", shortcutUrl) // This makes tapping the notification run your shortcut
-        .header("Title", "School Day Update")  // Sets the notification title
-        .header("Priority", "high")            // Sets urgency (1=min, 5=max)
+        .header("Title", "Today's Schedule Update")  // Sets the notification title
+        .header("Priority", "5")            // Sets urgency (1=min, 5=max)
+         if(dayNum%2==0)
+        {
+            .header("Tags", "ball")
+        }
+        else if(dayNum==1 || dayNum==5 || dayNum==9)
+        {
+            .header("Tags","test tube")
+        }
+        else 
+        {
+            .header("Tags","partying face")
+        }
         .header("Tags", "school,bell")
         .POST(HttpRequest.BodyPublishers.ofString(message))
         .build();
@@ -103,7 +115,7 @@ public static void sendPushNotification(String message) {
          String finalMessage = "It is a " + day + ". Second period: " + activity;
         
         // Send to iPhone
-        thing.sendPushNotification(finalMessage);
+        thing.sendPushNotification(finalMessage,day);
         
     }
 
