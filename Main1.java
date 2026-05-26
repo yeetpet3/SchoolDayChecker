@@ -54,25 +54,26 @@ public static void sendPushNotification(String message, String day2) {
     String ntfyUrl = "https://ntfy.sh/nfjdudidicic";
     //String shortcutUrl = "shortcuts://run-shortcut?name=school"; // Replace 'school' with your shortcut name
     int dayNum = Integer.parseInt(day2.substring(4));
+    String tags = null; 
+      if(dayNum%2==0)
+            {
+            tags = "ball";
+            }
+        else if(dayNum==1 || dayNum==5 || dayNum==9)
+            {
+            tags = "test tube";
+            }
+        else 
+            {
+            tags = "partying face";
+            }
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
         .uri(URI.create(ntfyUrl))
         //.header("Click", shortcutUrl) // This makes tapping the notification run your shortcut
         .header("Title", "Today's Schedule Update")  // Sets the notification title
         .header("Priority", "5")            // Sets urgency (1=min, 5=max)
-         if(dayNum%2==0)
-        {
-            .header("Tags", "ball")
-        }
-        else if(dayNum==1 || dayNum==5 || dayNum==9)
-        {
-            .header("Tags","test tube")
-        }
-        else 
-        {
-            .header("Tags","partying face")
-        }
-        .header("Tags", "school,bell")
+        .header("Tags",tags)
         .POST(HttpRequest.BodyPublishers.ofString(message))
         .build();
 
