@@ -74,6 +74,7 @@ public static void sendPushNotification(String message, String day2) {
         .header("Title", "Today's Schedule Update")  // Sets the notification title
         .header("Priority", "5")            // Sets urgency (1=min, 5=max)
         .header("Tags",tags)
+        .header("Attach", "https://avatars.githubusercontent.com/u/168948773?v=4&size=64")
         .POST(HttpRequest.BodyPublishers.ofString(message))
         .build();
 
