@@ -9,6 +9,10 @@ jobs:
   run-java:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # This ensures it pulls the full history/all files
       - name: List files (Debug)
         run: ls -R  # This prints every file and folder in the repo
       # Compiles the Java file fresh every time
