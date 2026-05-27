@@ -9,6 +9,12 @@ jobs:
   run-java:
     runs-on: ubuntu-latest
     steps:
+      # Compiles the Java file fresh every time
+      - name: Compile Java
+        run: javac Main1.java   
+      # Runs the compiled class
+      - name: Run Java
+        run: java Main1
       - uses: actions/checkout@v4
       - name: Set up JDK 17
         uses: actions/setup-java@v4
@@ -27,12 +33,7 @@ jobs:
           # The || exit 0 tells Git to ignore the error if there is nothing to commit
           git commit -m "Update daily school task" || exit 0
           git push
-      # Compiles the Java file fresh every time
-      - name: Compile Java
-        run: javac Main1.java
-        
-      # Runs the compiled class
-      - name: Run Java
+    
         env:
           PUSHCUT_WEBHOOK_URL: ${{secrets.THING_HELLO}}
-        run: java Main1
+       
