@@ -85,7 +85,12 @@ public static void sendPushNotification(String message, String day2) {
     }
 }
 
-    public static void writeToFile(String data) {
+    public static void writeToFile(String data) 
+    {
+    // This uses the current directory of the running process
+    String path = Paths.get("school_update.txt").toAbsolutePath().toString();
+    System.out.println("Writing to: " + path);
+    
     try (FileWriter writer = new FileWriter("school_update.txt")) {
         writer.write(data);
     } catch (IOException e) {
