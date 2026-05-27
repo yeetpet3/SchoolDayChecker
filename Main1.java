@@ -84,6 +84,14 @@ public static void sendPushNotification(String message, String day2) {
         e.printStackTrace();
     }
 }
+
+    public static void writeToFile(String data) {
+    try (FileWriter writer = new FileWriter("school_update.txt")) {
+        writer.write(data);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     public String activities(String day1)
     {
         
@@ -117,6 +125,7 @@ public static void sendPushNotification(String message, String day2) {
          String finalMessage = "It is a " + day + ". Second period: " + activity;
         
         // Send to iPhone
+        thing.writeToFile(finalMessage); 
         thing.sendPushNotification(finalMessage,day);
         
     }
