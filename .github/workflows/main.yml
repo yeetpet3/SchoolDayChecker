@@ -15,6 +15,13 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name 'GitHub Action'
+          git config --global user.email 'action@github.com'
+          git add school_update.txt
+          git commit -m "Update school data"
+          git push
       
       # Compiles the Java file fresh every time
       - name: Compile Java
