@@ -86,11 +86,15 @@ public static void sendPushNotification(String message, String day2) {
     }
 }
 
-    public static void writeToFile(String data) 
-    {
-    // This forces the file to be created in the current directory
-    try (FileWriter writer = new FileWriter("./school_update.txt")) {
+    public static void writeToFile(String data) {
+    // This tells Java to write specifically to the current working directory
+    String workingDir = System.getProperty("user.dir");
+    String fullPath = workingDir + "/school_update.txt";
+    System.out.println("DEBUG: Java is writing to: " + fullPath);
+    
+    try (FileWriter writer = new FileWriter(fullPath)) {
         writer.write(data);
+        writer.flush();
     } catch (IOException e) {
         e.printStackTrace();
     }
