@@ -9,6 +9,8 @@ jobs:
   run-java:
     runs-on: ubuntu-latest
     steps:
+      - name: List files (Debug)
+        run: ls -R  # This prints every file and folder in the repo
       # Compiles the Java file fresh every time
       - name: Compile Java
         run: javac Main1.java   
