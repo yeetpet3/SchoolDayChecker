@@ -15,14 +15,14 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-      - name: Commit and Push changes
-        run: |
-          git config --global user.name 'GitHub Action'
-          git config --global user.email 'action@github.com'
+       - name: Commit and Push changes
+         run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add school_update.txt
-          git commit -m "Update school data"
+          # The || exit 0 tells Git to ignore the error if there is nothing to commit
+          git commit -m "Update daily school task" || exit 0
           git push
-      
       # Compiles the Java file fresh every time
       - name: Compile Java
         run: javac Main1.java
