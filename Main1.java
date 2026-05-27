@@ -57,7 +57,7 @@ public static void sendPushNotification(String message, String day2) {
     String tags = null; 
       if(dayNum%2==0)
             {
-            tags = "running_shoe";
+            tags = "athletic_shoe";
             }
         else if(dayNum==1 || dayNum==5 || dayNum==9)
             {
