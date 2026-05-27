@@ -35,8 +35,8 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git status
           git add school_update.txt
-          # The || exit 0 tells Git to ignore the error if there is nothing to commit
           git commit -m "Update daily school task" || exit 0
           git push
     
