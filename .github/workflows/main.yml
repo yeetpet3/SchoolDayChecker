@@ -15,6 +15,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Debug and Verify
+        run: |
+          echo "File content is:"
+          cat school_update.txt
       - name: Commit and Push changes
         run: |
           git config --global user.name 'github-actions[bot]'
