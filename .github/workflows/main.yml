@@ -35,10 +35,13 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git status
-          git add school_update.txt
-          git commit -m "Update daily school task" || exit 0
-          git push
+          git add -f school_update.txt
+          if git diff --quiet && git diff --staged --quiet; then
+              echo "No changes to commit."
+          else
+              git commit -m "Update daily school task"
+              git push
+          fi
     
         env:
           PUSHCUT_WEBHOOK_URL: ${{secrets.THING_HELLO}}
