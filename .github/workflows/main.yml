@@ -11,8 +11,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
         with:
-          fetch-depth: 0 # This ensures it pulls the full history/all files
+          java-version: '17'
+          distribution: 'temurin'
       - name: List files (Debug)
         run: ls -R  # This prints every file and folder in the repo
       # Compiles the Java file fresh every time
@@ -21,12 +24,7 @@ jobs:
       # Runs the compiled class
       - name: Run Java
         run: java Main1
-      - uses: actions/checkout@v4
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
-        with:
-          java-version: '17'
-          distribution: 'temurin'
+      
       - name: Debug and Verify
         run: |
           echo "File content is:"
