@@ -58,15 +58,15 @@ public static void sendPushNotification(String message, String day2) {
     String tags = null; 
       if(dayNum%2==0)
             {
-            tags = "athletic_shoe";
+            tags = "👟";
             }
         else if(dayNum==1 || dayNum==5 || dayNum==9)
             {
-            tags = "test_tube";
+            tags = "🧪";
             }
         else 
             {
-            tags = "partying_face";
+            tags = "🥳";
             }
     HttpClient client = HttpClient.newHttpClient();
     HttpRequest request = HttpRequest.newBuilder()
@@ -90,7 +90,6 @@ public static void sendPushNotification(String message, String day2) {
     // This tells Java to write specifically to the current working directory
     String workingDir = System.getProperty("user.dir");
     String fullPath = workingDir + "/school_update.txt";
-    System.out.println("DEBUG: Java is writing to: " + fullPath);
     
     try (FileWriter writer = new FileWriter(fullPath)) {
         writer.write(data);
@@ -131,8 +130,22 @@ public static void sendPushNotification(String message, String day2) {
 
          String finalMessage = "It is a " + day + ". Second period: " + activity;
         
+        int dayNum = Integer.parseInt(day.substring(4));
+        String emoji = null; 
+          if(dayNum%2==0)
+            {
+            emoji = "👟";
+            }
+         else if(dayNum==1 || dayNum==5 || dayNum==9)
+            {
+            emoji = "🧪";
+            }
+        else 
+            {
+            emoji = "🥳";
+            }
+        thing.writeToFile(emoji + " " + finalMessage); 
         // Send to iPhone
-        thing.writeToFile(finalMessage); 
         thing.sendPushNotification(finalMessage,day);
         
     }
