@@ -1,7 +1,7 @@
 name: Daily School Task
 on:
   schedule:
-    - cron: '15 07 * * *'
+    - cron: '15 05 * * *'
       timezone: 'America/New_York'
   workflow_dispatch: # Still allows you to run it manually for testing
 
